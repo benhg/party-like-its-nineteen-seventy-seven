@@ -1,3 +1,27 @@
-jmp $
-times 510 - ($ - $$) db 0
-dw 0xAA55
+org 0x7C00 ; BIOS starts here
+bits 16;
+
+main: ; Label for main program
+   cli;
+   mov si, msg ; point source index at our message (declared later)
+   mov ah, 0xE ;
+
+.loop lodsb ; Load value pointed at by SI into AL and increment SI
+       or al, al; If the AL is empty, that means we've hit the end of the string
+       ; (here, we're running bitwise OR on al and itself and putting result into AL)
+       jz halt ; Jump to our halt (just runs hlt instruction) if AL is 0
+       int 0x10; 0x10 is the interrupt to print character
+       jmp .loop; jump back to .loop tag
+
+
+
+
+halt: hlt ; Define a command to halt so that we can jump to it
+msg: db "what's up?", 0; declare message as bytes 
+
+
+
+
+;; Set up the magic numbers
+times 510 - ($ - $$) db 0 ; write zeroes into b0-510
+dw 0xAA55 ; AA55 is the magic number for 511 and 512
