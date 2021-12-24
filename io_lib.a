@@ -2,12 +2,12 @@
 ;; This file is where we keep IO library
 ;;
 
-
+;; putstr: Print a NUL-terminated string that is pointed to by si
 putstr:
         mov ah, 0xE                    ; 0xE / eh tells BIOS putchar
 
 .loop:
-		lodsb                    ; Load value pointed at by SI into AL and increment SI
+	lodsb                          ; Load value pointed at by SI into AL and increment SI
         cmp al, 0                      ; If the AL is empty, we hit end of string
 ; (here, we're cmp AL with 0 literal)
         je .halt                       ; Jump to our halt (just runs ret instruction)end ot string
@@ -16,3 +16,28 @@ putstr:
 
 .halt:
         ret                            ; Define a command to halt so that we can jump to it
+
+;; printf: Print a formatted NUL-term string.
+;; Point at format-encoded string literal with SI
+;; Point at list of format args with ah
+;; For now, format args can only be one byte
+printf:
+mov ah, 0xE ; Get ready to putchar
+
+.loop:
+    lodsb ; Load SI into AL, increment SI
+    cmp al, 0 ; If we're at the end of the string, we want to end
+    je .ret
+    cmp al, % ; % is the reserved string used as a format
+    je insert_format
+    ; insert_format doesn't put the char, just sets it up to be put
+    int 0x10
+    jmp .loop
+
+.insert_format:
+    mov al, [dx] ; Move val pointed at by ah into al
+    inc ah ; Increment ah now that we're done with this
+    ret;
+
+.ret:
+    ret
