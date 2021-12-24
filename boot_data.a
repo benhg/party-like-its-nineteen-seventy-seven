@@ -1,0 +1,9 @@
+;; boot_data.a
+;; This file is where we keep literals/constants and other definitions for the bootloader
+;;
+
+msg:
+        db `Welcome to GlickOS\r\n`, 0             ; declare message as bytes
+
+gb_msg:
+		db `get out of town, buster brown\r\n`, 0

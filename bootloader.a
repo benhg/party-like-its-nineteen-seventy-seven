@@ -5,33 +5,24 @@ boot:                                  ; Label for main program
         mov ax, 07c0h                  ; 4k stack
         add ax, 288                    ; 4k stack + 512 boot / 16
         mov ss, ax                     ; put the val of ax into the stack segment
-        mov si, msg                    ; point source index at our message (declared later)
 
         mov ax, 07c0h                  ; Move data segment to current location
         mov ds, ax                     ; put the ax address into data seg
 
-        mov si, msg
-        call putstr                    ; The putchar routine prints a string from si
+        mov si, msg                    ; point source index at our message (declared later)
+        call putstr                    ; The putstr routine prints a null-terminated string from si
+
+        ;; do stuff
+
+        mov si, gb_msg				   ; time to say goodbye
+        call putstr
 
         hlt                            ; once we get here, halt
 
-msg:
-        db "what's up?", 0             ; declare message as bytes
 
-putstr:
-        mov ah, 0xE                    ; 0xE / eh tells BIOS putchar
+%include "boot_data.a"
+%include "io_lib.a"
 
-        .loop lodsb                    ; Load value pointed at by SI into AL and increment SI
-        cmp al, 0                      ; If the AL is empty, we hit end of string
-; (here, we're cmp AL with 0 literal)
-        je .halt                       ; Jump to our halt (just runs ret instruction)end ot string
-        int 0x10                       ; 0x10 is the interrupt to print character
-        jmp .loop                      ; jump back to .loop tag
-
-.halt:
-        ret                            ; Define a command to halt so that we can jump to it
-
-; ; Set up the magic numbers
-times 510 - ($ - $$):
-        db 0                           ; write zeroes into b0-510
-        dw 0xAA55                      ; AA55 is the magic number for 511 and 512
+;; Set up the magic numbers
+times 510 - ($ - $$) db 0 ; write zeroes into b0-510
+dw 0xAA55 ; AA55 is the magic number for 511 and 512

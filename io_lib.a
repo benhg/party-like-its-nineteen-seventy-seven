@@ -1,0 +1,18 @@
+;; io_lib.a
+;; This file is where we keep IO library
+;;
+
+
+putstr:
+        mov ah, 0xE                    ; 0xE / eh tells BIOS putchar
+
+.loop:
+		lodsb                    ; Load value pointed at by SI into AL and increment SI
+        cmp al, 0                      ; If the AL is empty, we hit end of string
+; (here, we're cmp AL with 0 literal)
+        je .halt                       ; Jump to our halt (just runs ret instruction)end ot string
+        int 0x10                       ; 0x10 is the interrupt to print character
+        jmp .loop                      ; jump back to .loop tag
+
+.halt:
+        ret                            ; Define a command to halt so that we can jump to it
