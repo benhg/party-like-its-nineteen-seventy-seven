@@ -1,0 +1,5 @@
+;;
+;; bios_defines.ah
+;; This file is for macros relating to BIOS interaction
+
+%define INTR_PUTCHAR 0x10

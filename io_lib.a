@@ -2,6 +2,8 @@
 ;; This file is where we keep IO library
 ;;
 
+%include 
+
 ;; putstr: Print a NUL-terminated string that is pointed to by si
 putstr:
         mov ah, 0xE                    ; 0xE / eh tells BIOS putchar
@@ -11,7 +13,7 @@ putstr:
         cmp al, 0                      ; If the AL is empty, we hit end of string
 ; (here, we're cmp AL with 0 literal)
         je .halt                       ; Jump to our halt (just runs ret instruction)end ot string
-        int 0x10                       ; 0x10 is the interrupt to print character
+        int INTR_PUTCHAR
         jmp .loop                      ; jump back to .loop tag
 
 .halt:
@@ -31,7 +33,7 @@ mov ah, 0xE ; Get ready to putchar
     cmp al, % ; % is the reserved string used as a format
     je insert_format
     ; insert_format doesn't put the char, just sets it up to be put
-    int 0x10
+    int INTR_PUTCHAR
     jmp .loop
 
 .insert_format:
