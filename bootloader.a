@@ -1,23 +1,36 @@
-org 0x7C00 ; BIOS starts here
 bits 16;
 
-main: ; Label for main program
+boot: ; Label for main program
    cli;
+   mov ax, 07c0h ; 4k stack
+   add ax, 288 ; 4k stack + 512 boot / 16
+   mov ss, ax ; put the val of ax into the stack segment
    mov si, msg ; point source index at our message (declared later)
-   mov ah, 0xE ;
+
+   mov ax, 07c0h ; Move data segment to current location
+   mov ds, ax ; put the ax address into data seg
+
+   mov si, msg ;
+   call putstr ; The putchar routine prints a string from si
+
+   hlt; once we get here, halt
+
+   msg: db "what's up?", 0; declare message as bytes 
+
+putstr: 
+	 mov ah, 0xE ; 0xE / eh tells BIOS putchar
 
 .loop lodsb ; Load value pointed at by SI into AL and increment SI
-       or al, al; If the AL is empty, that means we've hit the end of the string
-       ; (here, we're running bitwise OR on al and itself and putting result into AL)
-       jz halt ; Jump to our halt (just runs hlt instruction) if AL is 0
+       cmp al, 0; If the AL is empty, we hit end of string
+       ; (here, we're cmp AL with 0 literal)
+       je .halt ; Jump to our halt (just runs ret instruction)end ot string
        int 0x10; 0x10 is the interrupt to print character
        jmp .loop; jump back to .loop tag
 
+.halt: ret ; Define a command to halt so that we can jump to it
 
 
 
-halt: hlt ; Define a command to halt so that we can jump to it
-msg: db "what's up?", 0; declare message as bytes 
 
 
 
