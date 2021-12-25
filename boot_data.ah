@@ -15,3 +15,12 @@ printf_test:
 
 printf_data:
     db `qe`, 0
+
+post_start_msg:
+    db `Beginning Power-On Self Test\r\n`, 0
+
+post_end_msg:
+    db `Done with Power-On Self Test. Result: 1111111\r\n`, 0
+
+post_printf_data:
+    db `Success`, 0
