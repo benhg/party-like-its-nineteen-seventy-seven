@@ -30,16 +30,19 @@ mov ah, 0xE  ; Get ready to putchar
     lodsb ; Load SI into AL, increment SI
     cmp al, 0 ; If we're at the end of the string, we want to end
     je .ret ;
-    cmp al, 1 ; '1' is the reserved string used as a format
+
+    cmp al, ASCII_1 ; '1' is the reserved string use as a format
     je .insert_format ;
     ; .insert_format doesn't put the char, just sets it up to be put
+.printf_putchar:
     int INTR_PUTCHAR               ;
-    jmp .loop2            ;
+    jmp .loop2           ;
+
+.ret:
+    
+    ret
 
 .insert_format:
     mov al, [ebx] ; Move val pointed at by ebx into al
-    inc ah ; Increment ah now that we're done with this
-    ret;
-
-.ret:
-    ret
+    inc ebx ; Increment ebx now that we're done with this
+    jmp .printf_putchar;

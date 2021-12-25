@@ -14,14 +14,19 @@ boot:                                  ; Label for main program
 
         ;; do stuff
 
-        mov si, gb_msg				   ; time to say goodbye
+        ;; test printf
+        mov si, printf_test    ;
+        mov ebx, printf_data ;
+        call printf            ;
+
+        mov si, gb_msg			; time to say goodbye
         call putstr
 
         hlt                            ; once we get here, halt
 
 
-%include "boot_data.a"
-%include "io_lib.a"
+%include "boot_data.ah"
+%include "io_lib.asm"
 
 ;; Set up the magic numbers
 times 510 - ($ - $$) db 0 ; write zeroes into b0-510
