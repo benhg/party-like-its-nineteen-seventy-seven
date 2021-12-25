@@ -6,12 +6,12 @@ msg:
         db `Welcome to GlickOS\r\n`, 0             ; declare message as bytes
 
 gb_msg:
-		db `get out of town, buster brown\r\n`, 0
+	db `get out of town, buster brown\r\n`, 0
 
 
 ;; Test for printf. We should see "this is a byte word: q"
 printf_test:
-    db `this is a byte word: 1\r\n`, 0
+    db `this is a byte word: 1 another one: 1\r\n`, 0
 
 printf_data:
-    db `q`, 0
+    db `qe`, 0

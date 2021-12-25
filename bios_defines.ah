@@ -2,6 +2,8 @@
 ;; bios_defines.ah
 ;; This file is for macros relating to BIOS interaction
 
+;; BIOS call defines
+%define BIOS_PUTCHAR 0xE
 
 ;; Interrupt defines
 %define INTR_PUTCHAR 0x10; Interrupt which tells BIOs to print a character

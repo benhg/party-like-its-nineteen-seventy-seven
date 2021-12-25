@@ -7,7 +7,8 @@
 ;; putstr: Print a NUL-terminated string that is pointed to by si
 
 putstr:
-        mov ah, 0xE                    ; 0xE / eh tells BIOS putchar
+        mov ah, BIOS_PUTCHAR  ; Tell the bios we're going to putchar by putting e into ah
+                              ; therefore, when we do the interrupt, BIOS reads char out of al and prints it.
 
 .loop1:
 	lodsb                          ; Load value pointed at by SI into AL and increment SI
@@ -24,7 +25,7 @@ putstr:
 ;; Point at list of format args with ah
 ;; For now, format args can only be one byte
 printf:
-mov ah, 0xE  ; Get ready to putchar
+mov ah, BIOS_PUTCHAR  ; Get ready to putchar
 
 .loop2:
     lodsb ; Load SI into AL, increment SI
@@ -33,7 +34,7 @@ mov ah, 0xE  ; Get ready to putchar
 
     cmp al, ASCII_1 ; '1' is the reserved string use as a format
     je .insert_format ;
-    ; .insert_format doesn't put the char, just sets it up to be put
+    ; .insert_format doesn't put the char, just puts in al and increments ebx
 .printf_putchar:
     int INTR_PUTCHAR               ;
     jmp .loop2           ;
