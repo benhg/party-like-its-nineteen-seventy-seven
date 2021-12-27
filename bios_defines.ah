@@ -8,6 +8,5 @@
 ;; Interrupt defines
 %define INTR_PUTCHAR 0x10; Interrupt which tells BIOs to print a character
 
-
-;; Ascii hex defines
-%define ASCII_1 31h
+;; memory layout related defines
+%define STACK_START_ADDR 0x1200  ; hex1200 is the stack address here

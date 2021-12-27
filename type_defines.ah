@@ -1,0 +1,6 @@
+;;
+;; type_defines.ah
+;; This file is for macros relating to data types and so-on
+
+;; Ascii hex defines
+%define ASCII_1 31h
