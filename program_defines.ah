@@ -1,0 +1,14 @@
+;;
+;; program_defines.ah
+;; Macros for the assembler to use to lay out our program appropriately
+
+; Number of zeros = 512 + (number of sectors read * 512)
+; To start with, we're setting up 1 sector plus the boot sector
+%define PROGRAM_SIZE 1024
+
+; AA55 is the magic number which we place at locations 511 and 512
+; of the boot segment to tell the BIOS this disk is bootable
+%define BOOT_MAGIC_NUM
+
+; 510 is the number of bytes that have to be zeroed before the boot magic number
+%define BOOT_LOCATION 510
