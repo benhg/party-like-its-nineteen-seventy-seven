@@ -47,3 +47,12 @@ mov ah, BIOS_PUTCHAR  ; Get ready to putchar
     mov al, [ebx] ; Move val pointed at by ebx into al
     inc ebx ; Increment ebx now that we're done with this
     jmp .printf_putchar;
+
+;; getchar: Get a character from the screen 
+;; and put it into address pointed to by ebx
+;; DOES NOT increment ebx
+getchar:
+    mov ah, 0h
+    int INTR_GETCHAR ;; This puts the char into al reg
+    mov [ebx], al ;; copy the character over to ecx's pointee
+    ret

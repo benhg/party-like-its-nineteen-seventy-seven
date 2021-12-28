@@ -12,6 +12,14 @@ post:
     mov ebx, printf_data;
     call printf ;
 
+    ;; test getchar
+    mov si, getchar_tst_msg ;
+    call putstr
+    mov ecx, getchar_test_save_loc
+    call getchar
+    mov si, getchar_res_msg
+    call printf
+
     mov si, post_end_msg ;
     mov ebx, post_success_data ;
     call printf;
