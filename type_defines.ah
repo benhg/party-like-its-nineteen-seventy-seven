@@ -4,3 +4,4 @@
 
 ;; Ascii hex defines
 %define ASCII_1 31h
+%define ASCII_SLASH 2fh

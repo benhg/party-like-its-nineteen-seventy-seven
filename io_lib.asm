@@ -55,5 +55,25 @@ getchar:
     mov ah, 0h
     int INTR_GETCHAR ;; This puts the char into al reg
     mov [ebx], al ;; copy the character over to ecx's pointee
-    mov ax, 0h
     ret
+
+;; getstr
+;; Get a string. Keep listening for more keystrokes until
+;; a) string ends (we assume strings will be terminated with `/`)
+;; b) string is too big (caller should pass in a maximum size thru cx)
+;; Caller should put an address for storing the string in ebx
+;; Program will put the string in the location specified by ebx
+;; Program will return length of passed-in string in dx
+getstr:
+    mov dx, 0;
+.loop_getstr:
+    call getchar
+    inc dx
+    cmp al, ASCII_SLASH
+    je .halt_getstr
+    cmp dx, cx ; if dx (string count) bigger than cx (max passed by user)
+    jge .halt_getstr
+    jmp .loop_getstr
+
+.halt_getstr:
+    ret;
