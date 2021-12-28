@@ -22,5 +22,8 @@ post_start_msg:
 post_end_msg:
     db `Done with Power-On Self Test. Result: 1111111\r\n`, 0
 
-post_printf_data:
+post_success_data:
+    db `Success`, 0
+
+post_failure_data:
     db `Success`, 0

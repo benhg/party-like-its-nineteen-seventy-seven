@@ -13,6 +13,6 @@ post:
     call printf ;
 
     mov si, post_end_msg ;
-    mov ebx, post_printf_data ;
+    mov ebx, post_success_data ;
     call printf;
     ret
