@@ -2,11 +2,20 @@
 ;; bios_defines.ah
 ;; This file is for macros relating to BIOS interaction
 
-;; BIOS call defines
+;; BIOS call interrupts
 %define BIOS_PUTCHAR 0xE
+
+;; BIOS interrupt values for disk
+%define BIOS_READ_SECTORS 0x02    ; read sectors
+%define BIOS_INIT_SECTORS 0x01    ; sectors to read
+%define BIOS_CYLINDER_IDX 0x00    ; cylinder idx
+%define BIOS_HEAD_IDX 0x00    ; head idx
+%define BIOS_SECTOR_IDX 0x02    ; sector idx
+%define BIOS_DISK_IDX 0x00    ; disk idx
 
 ;; Interrupt defines
 %define INTR_PUTCHAR 0x10; Interrupt which tells BIOs to print a character
+%define INTR_SET_DISK 0x13
 
 ;; memory layout related defines
 %define STACK_START_ADDR 0x1200  ; hex1200 is the stack address here

@@ -14,14 +14,14 @@ boot:   ; Label for main program
         mov ss, ax      ; put the val of ax into the stack segment
         mov sp, bp
         ; load more than 512 bytes into memory
-        mov ah, 0x02    ; read sectors
-        mov al, 0x01    ; sectors to read
-        mov ch, 0x00    ; cylinder idx
-        mov dh, 0x00    ; head idx
-        mov cl, 0x02    ; sector idx
-        mov dl, 0x00    ; disk idx
+        mov ah, BIOS_READ_SECTORS
+        mov al, BIOS_INIT_SECTORS
+        mov ch, BIOS_CYLINDER_IDX
+        mov dh, BIOS_HEAD_IDX
+        mov cl, BIOS_SECTOR_IDX
+        mov dl, BIOS_DISK_IDX
         mov bx, post ; address of more than 512 bytes
-        int 0x13
+        int INTR_SET_DISK ; send interrupt to say apply disk settings set above
 
         mov si, msg                    ; point source index at our message (declared later)
         call putstr                    ; The putstr routine prints a null-terminated string from si
