@@ -15,10 +15,12 @@ post:
     ;; test getchar
     mov si, getchar_tst_msg ;
     call putstr
-    mov ecx, getchar_test_save_loc
+    mov ebx, getchar_test_save_loc
     call getchar
+    mov ebx, getchar_test_save_loc
     mov si, getchar_res_msg
     call printf
+    mov ebx, 0h;
 
     mov si, post_end_msg ;
     mov ebx, post_success_data ;

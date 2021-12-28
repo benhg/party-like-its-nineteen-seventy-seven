@@ -55,4 +55,5 @@ getchar:
     mov ah, 0h
     int INTR_GETCHAR ;; This puts the char into al reg
     mov [ebx], al ;; copy the character over to ecx's pointee
+    mov ax, 0h
     ret

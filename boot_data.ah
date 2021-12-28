@@ -32,7 +32,7 @@ getchar_tst_msg:
     db `Testing getchar function. please insert a key\r\n`, 0
 
 getchar_test_save_loc:
-   db `0\r\n`, 0
+   db `0`, 0
 
 getchar_res_msg:
-    db `Getchar test value: 1\r\n`
+    db `Getchar test value: 1\r\n`, 0
