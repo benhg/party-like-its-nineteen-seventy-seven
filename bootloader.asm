@@ -4,6 +4,7 @@ bits 16
 
 %include "bios_defines.ah"
 %include "type_defines.ah"
+%include "program_defines.ah"
 
 boot:   ; Label for main program
         ; stack and segment setup
@@ -40,11 +41,11 @@ boot:   ; Label for main program
 %include "io_lib.asm"
 
 ;; Set up the magic numbers
-times 510 - ($ - $$) db 0 ; write zeroes into b0-510
-dw 0xAA55 ; AA55 is the magic number for 511 and 512
+times BOOT_LOCATION - ($ - $$) db 0 ; write zeroes into b0-510
+dw BOOT_MAGIC_NUM ; Magic number is how the BIOS knows this is a bootable segment 
 
 %include "post.asm"
 %include "shell.asm"
 
-; amount of zeros = 512 + (number of sectors read * 512)
-times 1024-($-$$) db 0
+; Zero out as much space as we need for the program
+times PROGRAM_SIZE-($-$$) db 0

@@ -19,4 +19,4 @@
 %define INTR_GETCHAR 16h
 
 ;; memory layout related defines
-%define STACK_START_ADDR 0x1200  ; hex1200 is the stack address here
+%define STACK_START_ADDR 0x1200  ; hex1200 is the stack address for our purposes

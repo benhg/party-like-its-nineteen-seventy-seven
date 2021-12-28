@@ -22,6 +22,10 @@ post:
     call printf
     mov ebx, 0h;
 
+    ;; test getstr
+
+
+    ;; print end msgs
     mov si, post_end_msg ;
     mov ebx, post_success_data ;
     call printf;

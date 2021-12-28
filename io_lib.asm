@@ -76,4 +76,5 @@ getstr:
     jmp .loop_getstr
 
 .halt_getstr:
+    mov ax, 0h;
     ret;
