@@ -69,6 +69,7 @@ getstr:
 .loop_getstr:
     call getchar
     inc dx
+    inc ebx ; getchar does NOT increment address of string
     cmp al, ASCII_SLASH
     je .halt_getstr
     cmp dx, cx ; if dx (string count) bigger than cx (max passed by user)
