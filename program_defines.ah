@@ -8,7 +8,7 @@
 
 ; AA55 is the magic number which we place at locations 511 and 512
 ; of the boot segment to tell the BIOS this disk is bootable
-%define BOOT_MAGIC_NUM
+%define BOOT_MAGIC_NUM 0xAA55
 
 ; 510 is the number of bytes that have to be zeroed before the boot magic number
 %define BOOT_LOCATION 510
