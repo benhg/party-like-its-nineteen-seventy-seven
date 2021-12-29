@@ -29,7 +29,7 @@ boot:   ; Label for main program
 
         call post
 
-        ;;call main_shell
+        call main_shell
 
         mov si, gb_msg			; time to say goodbye
         call putstr
