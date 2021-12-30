@@ -8,4 +8,8 @@
 ;; based on those commands
 main_shell:
 	inc ax;
+
+	mov si, shell_ps1 ;
+	call putstr ;
+
 	ret;
