@@ -20,3 +20,9 @@ curworkdir:
 ;; Memory allocated to store the current command being executed
 cmd_response:
     db `00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, 0
+
+cmd_err_msg:
+    db `Your commands are useless here, mortal.\r\n`, 0
+
+shell_quit_msg:
+    db `Thank you for shopping with us\r\n`, 0
