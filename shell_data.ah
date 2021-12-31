@@ -1,0 +1,22 @@
+;;
+;; shell_data.ah
+;; This is where we keep the literal data for the shell subsystem
+
+; Macro for max length of work directory or command processed by os
+%define STRING_SIZE 128
+
+; PS1 value is not customizable at this time
+shell_ps1:
+    db `user@glickos: `, 0
+
+; newline literal is useful
+newline_return:
+	db `\r\n`, 0
+
+;; Memory allocated to store the cwd
+curworkdir:
+    db `00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, 0
+
+;; Memory allocated to store the current command being executed
+cmd_response:
+    db `00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, 0

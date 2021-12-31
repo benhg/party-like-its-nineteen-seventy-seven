@@ -36,6 +36,3 @@ getchar_test_save_loc:
 
 getchar_res_msg:
     db `Getchar test value: 1\r\n`, 0
-
-shell_ps1:
-    db `user@glickos:  \r\n`, 0
