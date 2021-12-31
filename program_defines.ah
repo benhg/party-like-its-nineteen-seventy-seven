@@ -4,7 +4,7 @@
 
 ; Number of zeros = 512 + (number of sectors read * 512)
 ; To start with, we're setting up 1 sector plus the boot sector
-%define PROGRAM_SIZE 1024
+%define PROGRAM_SIZE 2048
 
 ; AA55 is the magic number which we place at locations 511 and 512
 ; of the boot segment to tell the BIOS this disk is bootable

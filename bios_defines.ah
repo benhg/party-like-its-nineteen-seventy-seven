@@ -7,7 +7,7 @@
 
 ;; BIOS interrupt values for disk
 %define BIOS_READ_SECTORS 0x02    ; read sectors
-%define BIOS_INIT_SECTORS 0x01    ; sectors to read
+%define BIOS_INIT_SECTORS 0x03    ; sectors to read
 %define BIOS_CYLINDER_IDX 0x00    ; cylinder idx
 %define BIOS_HEAD_IDX 0x00    ; head idx
 %define BIOS_SECTOR_IDX 0x02    ; sector idx
