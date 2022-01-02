@@ -23,6 +23,19 @@ post:
     mov ebx, 0h;
 
     ;; test getstr
+    mov si, getstr_tst_msg
+    call putstr ;
+    mov ebx, getstr_test_loc
+    mov cx, POST_GETSTR_SZ
+    call getstr_with_print;
+    mov si, newline_return; advance the lin
+    call putstr;
+    mov si, getstr_tst_rslt_msg;
+    call putstr;
+    mov si, getstr_test_loc
+    call putstr;
+    mov si, newline_return;
+    call putstr;
 
 
     ;; print end msgs

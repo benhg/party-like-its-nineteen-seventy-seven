@@ -36,3 +36,14 @@ getchar_test_save_loc:
 
 getchar_res_msg:
     db `Getchar test value: 1\r\n`, 0
+
+%define POST_GETSTR_SZ 32
+
+getstr_test_loc:
+    db `00000000000000000000000000000000`, 0
+
+getstr_tst_msg:
+    db`Testing getstr function. Please type:\r\n`, 0
+
+getstr_tst_rslt_msg:
+    db`Getstr result :\r\n`, 0
